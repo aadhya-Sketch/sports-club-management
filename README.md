@@ -107,12 +107,10 @@ ER_Diagram.jpeg      ← Entity-Relationship diagram
 6. Visit `http://localhost:8080/SportsClubWeb/login.jsp`.
 
 ### Admin Login
-```
-URL: http://localhost:8080/SportsClubWeb/adminLogin.jsp
-Username: admin
-Password: admin123
-```
-*(Hardcoded for this project — not production-grade credential storage.)*
+Admin credentials are hardcoded in `AdminLoginServlet.java` for demo purposes
+(not stored in the database, not production-grade credential storage). Contact
+the author directly for the demo login, or check the source file if you have
+local access to the code.
 
 ## Database Tables
 
