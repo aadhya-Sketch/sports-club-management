@@ -49,15 +49,18 @@
                 <td><%= b.getStartTime() %> - <%= b.getEndTime() %></td>
                 <td><%= b.getBookingStatus() %></td>
                 <td>
-                    <% if ("Confirmed".equals(b.getBookingStatus())) { %>
-                        <form action="cancelBooking" method="post" style="display:inline;">
-                            <input type="hidden" name="bookingId" value="<%= b.getBookingId() %>">
-                            <button type="submit" onclick="return confirm('Cancel this booking? Note: booking fees are non-refundable.');">Cancel</button>
-                        </form>
-                    <% } else { %>
-                        —
-                    <% } %>
-                </td>
+    <% if ("Confirmed".equals(b.getBookingStatus())) { %>
+        <div class="action-stack">
+            <a class="btn-link" href="editBooking?bookingId=<%= b.getBookingId() %>&unitId=<%= b.getUnitId() %>">Change Slot</a>
+            <form action="cancelBooking" method="post">
+                <input type="hidden" name="bookingId" value="<%= b.getBookingId() %>">
+                <button type="submit" onclick="return confirm('Cancel this booking? Note: booking fees are non-refundable.');">Cancel</button>
+            </form>
+        </div>
+    <% } else { %>
+        —
+    <% } %>
+</td>
             </tr>
             <% } %>
         </table>
