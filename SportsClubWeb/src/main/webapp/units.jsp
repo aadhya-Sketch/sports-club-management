@@ -16,17 +16,19 @@
 </nav>
 <div class="page">
     <h2>Available Units</h2>
-    <ul>
-        <% 
-            List<FacilityUnit> units = (List<FacilityUnit>) request.getAttribute("units");
-            for (FacilityUnit u : units) {
-        %>
-            <li>
-                <%= u.getUnitName() %> — <%= u.getStatus() %>
-                — <a href="book?unitId=<%= u.getUnitId() %>">Book This Unit</a>
-            </li>
-        <% } %>
-    </ul>
+    <ul class="btn-list">
+    <% 
+        List<FacilityUnit> units = (List<FacilityUnit>) request.getAttribute("units");
+        for (FacilityUnit u : units) {
+    %>
+        <li>
+            <a class="btn-tile" href="book?unitId=<%= u.getUnitId() %>">
+                <%= u.getUnitName() %>
+                <span class="sub">Status: <%= u.getStatus() %> — Book This Unit</span>
+            </a>
+        </li>
+    <% } %>
+</ul>
     <p><a href="facilities">Back to Facilities</a></p>
 </div>
 </body>
