@@ -13,10 +13,10 @@
 </nav>
 <div class="page">
     <h2>Admin Dashboard</h2>
-    <ul>
-        <li><a href="adminBookings">View All Bookings</a></li>
-        <li><a href="adminRevenue">View Total Revenue</a></li>
-        <li><a href="logout">Logout</a></li>
+    <ul class="btn-list">
+        <li><a class="btn-tile" href="adminBookings">All Bookings</a></li>
+        <li><a class="btn-tile" href="adminRevenue">Total Revenue</a></li>
+        <li><a class="btn-tile" href="logout">Logout</a></li>
     </ul>
     </div>
 </body>
