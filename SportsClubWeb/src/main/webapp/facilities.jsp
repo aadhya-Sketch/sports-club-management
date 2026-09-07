@@ -16,17 +16,19 @@
 </nav>
 <div class="page">
     <h2>Facilities</h2>
-    <ul>
-        <% 
-            List<Facility> facilities = (List<Facility>) request.getAttribute("facilities");
-            for (Facility f : facilities) {
-        %>
-            <li>
-                <%= f.getFacilityName() %> (<%= f.getFacilityType() %>)
-                — <a href="units?facilityId=<%= f.getFacilityId() %>">View Units</a>
-            </li>
-        <% } %>
-    </ul>
+    <ul class="btn-list">
+    <% 
+        List<Facility> facilities = (List<Facility>) request.getAttribute("facilities");
+        for (Facility f : facilities) {
+    %>
+        <li>
+            <a class="btn-tile" href="units?facilityId=<%= f.getFacilityId() %>">
+                <%= f.getFacilityName() %>
+                <span class="sub"><%= f.getFacilityType() %> — View Units</span>
+            </a>
+        </li>
+    <% } %>
+</ul>
     <p><a href="dashboard">Back to Dashboard</a></p>
 </div>
 </body>
