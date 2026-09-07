@@ -261,3 +261,64 @@ a { color: var(--navy); }
 }
 
 .membership-status p { margin: 4px 0; }
+
+.btn-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-list li { margin: 0; }
+
+.btn-tile {
+    display: block;
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--navy);
+    padding: 14px 18px;
+    text-decoration: none;
+    color: var(--navy);
+    font-weight: 600;
+    transition: all 0.15s;
+}
+
+.btn-tile:hover {
+    border-left-color: var(--lime);
+    background: var(--bg);
+    padding-left: 22px;
+}
+
+.btn-tile .sub {
+    display: block;
+    font-weight: 400;
+    font-size: 0.85em;
+    color: var(--slate);
+    margin-top: 2px;
+}
+
+.action-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+}
+
+.action-stack form { margin: 0; }
+
+.btn-link {
+    display: inline-block;
+    background: white;
+    color: var(--navy);
+    border: 1px solid var(--navy);
+    padding: 6px 14px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    background: var(--bg);
+}
