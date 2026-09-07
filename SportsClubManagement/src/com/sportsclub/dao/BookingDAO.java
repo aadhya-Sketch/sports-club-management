@@ -180,4 +180,57 @@ public class BookingDAO {
         }
         return bookings;
     }
+    
+ // Same as isAvailable, but ignores one specific booking (the one being edited)
+    public boolean isAvailableExcluding(int unitId, Date bookingDate, Time startTime, int excludeBookingId) {
+        String sql = "SELECT COUNT(*) FROM bookings " +
+                     "WHERE unit_id = ? AND booking_date = ? AND start_time = ? " +
+                     "AND booking_status = 'Confirmed' AND booking_id != ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, unitId);
+            stmt.setDate(2, bookingDate);
+            stmt.setTime(3, startTime);
+            stmt.setInt(4, excludeBookingId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) == 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Reschedule an existing booking to a new date/time
+    public String rescheduleBooking(int bookingId, int memberId, Date newDate, Time newStartTime, Time newEndTime, int unitId) {
+        if (!isAvailableExcluding(unitId, newDate, newStartTime, bookingId)) {
+            return "That slot is already booked. Please choose another time.";
+        }
+
+        String sql = "UPDATE bookings SET booking_date = ?, start_time = ?, end_time = ? " +
+                     "WHERE booking_id = ? AND member_id = ? AND booking_status = 'Confirmed'";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setDate(1, newDate);
+            stmt.setTime(2, newStartTime);
+            stmt.setTime(3, newEndTime);
+            stmt.setInt(4, bookingId);
+            stmt.setInt(5, memberId);
+
+            int rows = stmt.executeUpdate();
+            return rows > 0 ? "Booking rescheduled successfully." : "Could not reschedule — booking not found.";
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Reschedule failed due to a system error.";
+        }
+    }
+
 }
